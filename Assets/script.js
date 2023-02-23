@@ -1,38 +1,59 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 $(function () {
-let now;
-let officeHours = ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17"];
+  const box9 = document.getElementById('hour-9');
+  const box10 = document.getElementById('hour-10');
+  const box11 = document.getElementById('hour-11');
+  const box12 = document.getElementById('hour-12');
+  const box1 = document.getElementById('hour-1');
+  const box2 = document.getElementById('hour-2');
+  const box3 = document.getElementById('hour-3');
+  const box4 = document.getElementById('hour-4');
+  const box5 = document.getElementById('hour-5');
+  const officeHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+  const boxOffice = [box9, box10, box11, box12, box1, box2, box3, box4, box5];
+  const textArea = document.querySelectorAll(".description")
+
   $('#currentDay').text(dayjs().format('MMM,D,YYYY h:mm:ss')) // set current time in the top on load
   setInterval(function(){
       $('#currentDay').text(dayjs().format('MMM,D,YYYY h:mm:ss')) // updates time
-      now = dayjs().format('H')
-      console.log(now);
+      let now = dayjs().format('H')
       checkTime(now);
     },10)
 
-  function checkTime(now){};
-  
+  function checkTime(now){ // updates the boxes to the correct class
+    for(let i = 0; i < officeHours.length; i++){
+      // console.log("check time loop on. Now is: " +now+ " i is " + i)
+      if(now > officeHours[i]){
+        // console.log(officeHours[i] + " is in the past. Now is: "+ now)
+        $(boxOffice[i]).removeClass("future");
+        $(boxOffice[i]).removeClass("present");
+        $(boxOffice[i]).addClass("past");
+      }
+
+      else if(now == officeHours[i]){
+        // console.log(officeHours[i] + " is in the present. Now is: "+ now)
+        $(boxOffice[i]).removeClass("future");
+        $(boxOffice[i]).addClass("present");
+        $(boxOffice[i]).removeClass("past");
+      }
+
+      else{
+        // console.log(officeHours[i] + " is in the future. Now is: "+ now)
+        $(boxOffice[i]).addClass("future");
+        $(boxOffice[i]).removeClass("present");
+        $(boxOffice[i]).removeClass("past");
+      }
+    }
+  };
+
   $(".saveBtn").click(function(){
     console.log("Save Clicked " + $(this).parent('div').attr('id'));
+    let eventDescription = $(this).siblings('.description').val()
+    let eventTime = $(this).siblings('.hour').text()
+    localStorage.setItem(eventTime, eventDescription)
   });
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
+
+  for(let i = 0; i < textArea.length; i++){
+    textArea[i].value = localStorage.getItem(textArea[i].id)
+    console.log(textArea[i].id)
+  }
 });
