@@ -39,7 +39,7 @@ $(function () {
     }
   }
 
-  $(".saveBtn").click(function () {
+  $(".saveBtn").click(function () { // function for the save button
     console.log("Save Clicked " + $(this).parent("div").attr("id"));
     let eventDescription = $(this).siblings(".description").val();
     let eventTime = $(this).siblings(".hour").text();
