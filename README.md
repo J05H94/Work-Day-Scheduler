@@ -1,3 +1,5 @@
 # 05 Third-Party APIs: Work Day Scheduler
+This project is here to help our friend the employee with a busy schedule. The first thing our friend, the employee will see is of course the title of the application. Under that, our friend, the employee will have a real time calendar, to help manage time down to the second. A work day can be busy, so we help our friend, the employee, by breaking it down into manageable hours. Additionally these boxes are color coded to help our friend, the employee track his tasks at a glance. Our friend, the employee, may need to step away from our application. We are happy to accommodate our friend, the employee with a helpful save feature. Once our friend, the employee is ready to return to his scheduler, his tasks will be remembered. 
 
-https://j05h94.github.io/Work-Day-Scheduler/ 
+./Assets/Capture.PNG
+https://j05h94.github.io/Work-Day-Scheduler/ https://github.com/J05H94/Work-Day-Scheduler
